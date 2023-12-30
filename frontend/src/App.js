@@ -5,6 +5,8 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/PersonList'
 import './index.css'
 import Notification from './components/Notification'
+import { ThemeProvider } from './components/providers/theme-provider'
+import Navbar from './components/Navbar'
 
 
 
@@ -21,7 +23,7 @@ const App = () => {
   // const [currentId, setCurrentId] = useState(persons.length + 1)
 
 
-  const [Message, setMessage ] = useState(null);
+  const [Message, setMessage] = useState(null);
 
 
 
@@ -46,7 +48,7 @@ const App = () => {
       setPersons(response)
       // setCurrentId(response.length + 1)
     })
-  },[])
+  }, [])
 
   const [error, setError] = useState(false)
 
@@ -58,7 +60,7 @@ const App = () => {
     borderRadius: 5,
     padding: 10,
     marginBottom: 10
-}
+  }
 
   // filteredPersons state for filtering the persons array
   // why state? 
@@ -73,15 +75,18 @@ const App = () => {
 
 
   return (
-    <div>
-      <h2>Phonebook</h2>
-      <Notification style={(!error) ? testStyle: null} message={Message}/>
-      <Filter persons={persons} setShowFilter={setShowFilter} setFilteredPersons={setFilteredPersons} setMessage={setMessage}/>
-      <h3>Add a new</h3>
-      <PersonForm setError={setError} persons={persons} setPersons={setPersons} setMessage={setMessage}/>
-      <h3>Numbers</h3>
-      <Persons persons={persons} filteredPersons={filteredPersons} showFilter={showFilter} setPersons={setPersons} setMessage={setMessage}/>
-    </div>
+    <ThemeProvider defaultTheme = "light">
+      <Navbar />
+      <div>
+        <h2>Phonebook</h2>
+        <Notification style={(!error) ? testStyle : null} message={Message} />
+        <Filter persons={persons} setShowFilter={setShowFilter} setFilteredPersons={setFilteredPersons} setMessage={setMessage} />
+        <h3>Add a new</h3>
+        <PersonForm setError={setError} persons={persons} setPersons={setPersons} setMessage={setMessage} />
+        <h3>Numbers</h3>
+        <Persons persons={persons} filteredPersons={filteredPersons} showFilter={showFilter} setPersons={setPersons} setMessage={setMessage} />
+      </div>
+    </ThemeProvider>
   )
 
 };

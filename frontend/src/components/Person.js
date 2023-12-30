@@ -23,7 +23,7 @@ const Person = (props) => {
     return (
         <div key={person.id}>
             <p>{person.name} {person.number}</p>
-            <button onClick={deleteButtonHandler}>delete</button>
+            <button className="bg-primary text-primary-foreground hover:bg-primary/90" onClick={deleteButtonHandler}>delete</button>
         </div>
     )
 }
